@@ -1,9 +1,8 @@
 
-def aprueba( minima=5.0)
+def aprueba( minima)
   file = File.open "alumnos.csv"
   data = file.readlines
   file.close
-  puts minima
   data.each do |alumno|
     nota = alumno.gsub(',', '').split(' ')
     suma = 0
@@ -65,8 +64,12 @@ until opcion == 6 do
   when "3"
     #mostrar alumnos aprobados , con metodo qe reciba nota de aprobacion, por dfecto 5
     puts "ingrese la nota minima para aprobar: "
-    notaminima = gets.chomp.to_i
-    puts notaminima
+    notaminima = gets.chomp
+    if notaminima == ''
+      notaminima = 5.0
+    else
+      notaminima = notaminima.to_i
+    end
 
     aprueba(notaminima)
 
