@@ -4,15 +4,14 @@ def aprueba( minima)
   data = file.readlines
   file.close
   data.each do |alumno|
-    nota = alumno.gsub(',', '').split(' ')
+    nota = alumno.split(', ')
     suma = 0
-    nota.each_with_index do |dato, i|
-      if i != 0 && dato != 'A'
-        dato = dato.to_i
-        suma += dato
-      end
+    nota[1..nota.size].each do |dato|
+      dato = 0 if dato == 'A'
+      dato = dato.to_i
+      suma += dato
     end
-    promedio = suma.to_f / (nota.length-1.to_f)
+    promedio = suma.to_f / (nota.length - 1.to_f)
     if promedio >= minima
       puts "#{nota[0]} APRUEBA con #{promedio} promedio\n"
     else
@@ -33,13 +32,12 @@ until opcion == 6 do
   when "1"
     #archivo con nombre de alumnos y promedio de sus notas
     data.each do |alumno|
-      nota = alumno.gsub(',', '').split(' ')
+      nota = alumno.split(', ')
       suma = 0
-      nota.each_with_index do |dato, i|
-        if i != 0 && dato != 'A'
-          dato = dato.to_i
-          suma += dato
-        end
+      nota[1..nota.size].each do |dato|
+        dato = 0 if dato == 'A'
+        dato = dato.to_i
+        suma += dato
       end
       promedio = suma.to_f / (nota.length-1.to_f)
       File.open(nota[0] + '.txt', 'w'){ |f|
@@ -51,12 +49,10 @@ until opcion == 6 do
   when "2"
     # inasistencias totales por pantalla
     data.each do |alumno|
-      nota = alumno.gsub(',', '').split(' ')
+      nota = alumno.gsub(',','').split(' ')
       suma = 0
-      nota.each_with_index do |dato, i|
-        if dato == 'A'
-          suma += 1
-        end
+      nota[1..nota.size].each do |dato|
+        suma += 1 if dato == 'A'
       end
       puts "#{nota[0]} tiene #{suma} inasistencias"
     end
