@@ -32,7 +32,7 @@ until opcion == 6 do
   case opcion
   when "1"
     #archivo con nombre de alumnos y promedio de sus notas
-    a = data.each do |alumno|
+    data.each do |alumno|
       nota = alumno.gsub(',', '').split(' ')
       suma = 0
       nota.each_with_index do |dato, i|
@@ -50,7 +50,7 @@ until opcion == 6 do
 
   when "2"
     # inasistencias totales por pantalla
-    b = data.each do |alumno|
+    data.each do |alumno|
       nota = alumno.gsub(',', '').split(' ')
       suma = 0
       nota.each_with_index do |dato, i|
